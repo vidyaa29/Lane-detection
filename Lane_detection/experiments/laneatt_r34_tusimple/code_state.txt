@@ -1,0 +1,31 @@
+Git hash: 2f8583ba14eccba05e6779668bc3a38bc751984a
+
+*************
+Git diff:
+*************
+diff --git a/lib/nms/src/nms.egg-info/PKG-INFO b/lib/nms/src/nms.egg-info/PKG-INFO
+index 6bb5d2a..5c3bc3d 100644
+--- a/lib/nms/src/nms.egg-info/PKG-INFO
++++ b/lib/nms/src/nms.egg-info/PKG-INFO
+@@ -1,10 +1,4 @@
+-Metadata-Version: 1.0
++Metadata-Version: 2.1
+ Name: nms
+ Version: 0.0.0
+-Summary: UNKNOWN
+-Home-page: UNKNOWN
+-Author: UNKNOWN
+-Author-email: UNKNOWN
+-License: UNKNOWN
+-Description: UNKNOWN
+-Platform: UNKNOWN
++License-File: LICENSE
+diff --git a/lib/nms/src/nms.egg-info/SOURCES.txt b/lib/nms/src/nms.egg-info/SOURCES.txt
+index bc63f31..be72857 100644
+--- a/lib/nms/src/nms.egg-info/SOURCES.txt
++++ b/lib/nms/src/nms.egg-info/SOURCES.txt
+@@ -1,3 +1,4 @@
++LICENSE
+ setup.py
+ src/nms.cpp
+ src/nms_kernel.cu

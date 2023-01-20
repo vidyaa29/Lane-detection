@@ -1,0 +1,543 @@
+[2022-09-16 00:21:50,164] [lib.experiment] [DEBUG] CLI Args:
+ Namespace(cfg='cfgs/laneatt_tusimple_resnet34.yml', cpu=False, deterministic=False, epoch=None, exp_name='laneatt_r34_tusimple', mode='train', resume=False, save_predictions=False, view=None)
+[2022-09-16 00:21:50,210] [lib.experiment] [DEBUG] Beginning training session. CFG used:
+# Model settings
+val_every: 10
+model_checkpoint_interval: 1
+seed: 0
+model:
+  name: LaneATT
+  parameters:
+    backbone: resnet34
+    S: &S 72
+    topk_anchors: 1000
+    anchors_freq_path: 'data/tusimple_anchors_freq.pt'
+    img_h: &img_h 360
+    img_w: &img_w 640
+batch_size: 8
+epochs: 100
+loss_parameters: {}
+train_parameters:
+  conf_threshold:
+  nms_thres: 15.
+  nms_topk: 3000
+test_parameters:
+  conf_threshold: 0.2
+  nms_thres: 45.
+  nms_topk: &max_lanes 5
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.0003
+lr_scheduler:
+  name: CosineAnnealingLR
+  parameters:
+    T_max: 45400 # 100 * 454 iterations
+
+# Dataset settings
+datasets:
+  train: &train
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: train+val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 1.0
+      augmentations:
+        - name: Affine
+          parameters:
+            translate_px:
+              x: !!python/tuple [-25, 25]
+              y: !!python/tuple [-10, 10]
+            rotate: !!python/tuple [-6, 6]
+            scale: !!python/tuple [0.85, 1.15]
+        - name: HorizontalFlip
+          parameters:
+            p: 0.5
+
+      root: "datasets/tusimple"
+
+  test:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: test
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple-test"
+
+  val:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple"
+
+[2022-09-16 00:35:31,340] [lib.experiment] [DEBUG] CLI Args:
+ Namespace(cfg='cfgs/laneatt_tusimple_resnet34.yml', cpu=False, deterministic=False, epoch=None, exp_name='laneatt_r34_tusimple', mode='train', resume=False, save_predictions=False, view=None)
+[2022-09-16 00:35:31,366] [lib.experiment] [DEBUG] Beginning training session. CFG used:
+# Model settings
+val_every: 10
+model_checkpoint_interval: 1
+seed: 0
+model:
+  name: LaneATT
+  parameters:
+    backbone: resnet34
+    S: &S 72
+    topk_anchors: 1000
+    anchors_freq_path: 'data/tusimple_anchors_freq.pt'
+    img_h: &img_h 360
+    img_w: &img_w 640
+batch_size: 8
+epochs: 100
+loss_parameters: {}
+train_parameters:
+  conf_threshold:
+  nms_thres: 15.
+  nms_topk: 3000
+test_parameters:
+  conf_threshold: 0.2
+  nms_thres: 45.
+  nms_topk: &max_lanes 5
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.0003
+lr_scheduler:
+  name: CosineAnnealingLR
+  parameters:
+    T_max: 45400 # 100 * 454 iterations
+
+# Dataset settings
+datasets:
+  train: &train
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: train+val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 1.0
+      augmentations:
+        - name: Affine
+          parameters:
+            translate_px:
+              x: !!python/tuple [-25, 25]
+              y: !!python/tuple [-10, 10]
+            rotate: !!python/tuple [-6, 6]
+            scale: !!python/tuple [0.85, 1.15]
+        - name: HorizontalFlip
+          parameters:
+            p: 0.5
+
+      root: "datasets/tusimple"
+
+  test:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: test
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple-test"
+
+  val:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple"
+
+[2022-09-16 00:39:10,733] [lib.experiment] [DEBUG] CLI Args:
+ Namespace(cfg='cfgs/laneatt_tusimple_resnet34.yml', cpu=False, deterministic=False, epoch=None, exp_name='laneatt_r34_tusimple', mode='train', resume=False, save_predictions=False, view=None)
+[2022-09-16 00:39:10,759] [lib.experiment] [DEBUG] Beginning training session. CFG used:
+# Model settings
+val_every: 10
+model_checkpoint_interval: 1
+seed: 0
+model:
+  name: LaneATT
+  parameters:
+    backbone: resnet34
+    S: &S 72
+    topk_anchors: 1000
+    anchors_freq_path: 'data/tusimple_anchors_freq.pt'
+    img_h: &img_h 360
+    img_w: &img_w 640
+batch_size: 8
+epochs: 100
+loss_parameters: {}
+train_parameters:
+  conf_threshold:
+  nms_thres: 15.
+  nms_topk: 3000
+test_parameters:
+  conf_threshold: 0.2
+  nms_thres: 45.
+  nms_topk: &max_lanes 5
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.0003
+lr_scheduler:
+  name: CosineAnnealingLR
+  parameters:
+    T_max: 45400 # 100 * 454 iterations
+
+# Dataset settings
+datasets:
+  train: &train
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: train+val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 1.0
+      augmentations:
+        - name: Affine
+          parameters:
+            translate_px:
+              x: !!python/tuple [-25, 25]
+              y: !!python/tuple [-10, 10]
+            rotate: !!python/tuple [-6, 6]
+            scale: !!python/tuple [0.85, 1.15]
+        - name: HorizontalFlip
+          parameters:
+            p: 0.5
+
+      root: "datasets/tusimple"
+
+  test:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: test
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple-test"
+
+  val:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple"
+
+[2022-09-16 00:43:51,517] [lib.experiment] [DEBUG] CLI Args:
+ Namespace(cfg='cfgs/laneatt_tusimple_resnet34.yml', cpu=False, deterministic=False, epoch=None, exp_name='laneatt_r34_tusimple', mode='train', resume=False, save_predictions=False, view=None)
+[2022-09-16 00:43:51,543] [lib.experiment] [DEBUG] Beginning training session. CFG used:
+# Model settings
+val_every: 10
+model_checkpoint_interval: 1
+seed: 0
+model:
+  name: LaneATT
+  parameters:
+    backbone: resnet34
+    S: &S 72
+    topk_anchors: 1000
+    anchors_freq_path: 'data/tusimple_anchors_freq.pt'
+    img_h: &img_h 360
+    img_w: &img_w 640
+batch_size: 8
+epochs: 100
+loss_parameters: {}
+train_parameters:
+  conf_threshold:
+  nms_thres: 15.
+  nms_topk: 3000
+test_parameters:
+  conf_threshold: 0.2
+  nms_thres: 45.
+  nms_topk: &max_lanes 5
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.0003
+lr_scheduler:
+  name: CosineAnnealingLR
+  parameters:
+    T_max: 45400 # 100 * 454 iterations
+
+# Dataset settings
+datasets:
+  train: &train
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: train+val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 1.0
+      augmentations:
+        - name: Affine
+          parameters:
+            translate_px:
+              x: !!python/tuple [-25, 25]
+              y: !!python/tuple [-10, 10]
+            rotate: !!python/tuple [-6, 6]
+            scale: !!python/tuple [0.85, 1.15]
+        - name: HorizontalFlip
+          parameters:
+            p: 0.5
+
+      root: "datasets/tusimple"
+
+  test:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: test
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple-test"
+
+  val:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple"
+
+[2022-09-16 00:43:53,672] [lib.datasets.tusimple] [INFO] Loading TuSimple annotations...
+[2022-09-16 00:43:53,877] [lib.datasets.tusimple] [INFO] 3626 annotations loaded, with a maximum of 5 lanes in an image.
+[2022-09-16 00:43:53,877] [lib.datasets.lane_dataset] [INFO] Transforming annotations to the model's target format...
+[2022-09-16 00:43:56,326] [lib.datasets.lane_dataset] [INFO] Done.
+[2022-09-16 00:43:56,329] [lib.experiment] [DEBUG] Epoch [1/100] starting.
+[2022-09-16 11:38:47,973] [lib.experiment] [DEBUG] CLI Args:
+ Namespace(cfg='cfgs/laneatt_tusimple_resnet34.yml', cpu=False, deterministic=False, epoch=None, exp_name='laneatt_r34_tusimple', mode='train', resume=False, save_predictions=False, view=None)
+[2022-09-16 11:38:47,991] [lib.experiment] [DEBUG] Beginning training session. CFG used:
+# Model settings
+val_every: 10
+model_checkpoint_interval: 1
+seed: 0
+model:
+  name: LaneATT
+  parameters:
+    backbone: resnet34
+    S: &S 72
+    topk_anchors: 1000
+    anchors_freq_path: 'data/tusimple_anchors_freq.pt'
+    img_h: &img_h 360
+    img_w: &img_w 640
+batch_size: 8
+epochs: 100
+loss_parameters: {}
+train_parameters:
+  conf_threshold:
+  nms_thres: 15.
+  nms_topk: 3000
+test_parameters:
+  conf_threshold: 0.2
+  nms_thres: 45.
+  nms_topk: &max_lanes 5
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.0003
+lr_scheduler:
+  name: CosineAnnealingLR
+  parameters:
+    T_max: 45400 # 100 * 454 iterations
+
+# Dataset settings
+datasets:
+  train: &train
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: train+val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 1.0
+      augmentations:
+        - name: Affine
+          parameters:
+            translate_px:
+              x: !!python/tuple [-25, 25]
+              y: !!python/tuple [-10, 10]
+            rotate: !!python/tuple [-6, 6]
+            scale: !!python/tuple [0.85, 1.15]
+        - name: HorizontalFlip
+          parameters:
+            p: 0.5
+
+      root: "datasets/tusimple"
+
+  test:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: test
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple-test"
+
+  val:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple"
+
+[2022-09-16 11:38:48,656] [lib.datasets.tusimple] [INFO] Loading TuSimple annotations...
+[2022-09-16 11:38:48,860] [lib.datasets.tusimple] [INFO] 3626 annotations loaded, with a maximum of 5 lanes in an image.
+[2022-09-16 11:38:48,861] [lib.datasets.lane_dataset] [INFO] Transforming annotations to the model's target format...
+[2022-09-16 11:38:51,321] [lib.datasets.lane_dataset] [INFO] Done.
+[2022-09-16 11:38:51,323] [lib.experiment] [DEBUG] Epoch [1/100] starting.
+[2022-09-16 11:40:42,211] [lib.experiment] [DEBUG] CLI Args:
+ Namespace(cfg='cfgs/laneatt_tusimple_resnet34.yml', cpu=False, deterministic=False, epoch=None, exp_name='laneatt_r34_tusimple', mode='train', resume=False, save_predictions=False, view=None)
+[2022-09-16 11:40:42,234] [lib.experiment] [DEBUG] Beginning training session. CFG used:
+# Model settings
+val_every: 10
+model_checkpoint_interval: 1
+seed: 0
+model:
+  name: LaneATT
+  parameters:
+    backbone: resnet34
+    S: &S 72
+    topk_anchors: 1000
+    anchors_freq_path: 'data/tusimple_anchors_freq.pt'
+    img_h: &img_h 360
+    img_w: &img_w 640
+batch_size: 8
+epochs: 100
+loss_parameters: {}
+train_parameters:
+  conf_threshold:
+  nms_thres: 15.
+  nms_topk: 3000
+test_parameters:
+  conf_threshold: 0.2
+  nms_thres: 45.
+  nms_topk: &max_lanes 5
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.0003
+lr_scheduler:
+  name: CosineAnnealingLR
+  parameters:
+    T_max: 45400 # 100 * 454 iterations
+
+# Dataset settings
+datasets:
+  train: &train
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: train+val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 1.0
+      augmentations:
+        - name: Affine
+          parameters:
+            translate_px:
+              x: !!python/tuple [-25, 25]
+              y: !!python/tuple [-10, 10]
+            rotate: !!python/tuple [-6, 6]
+            scale: !!python/tuple [0.85, 1.15]
+        - name: HorizontalFlip
+          parameters:
+            p: 0.5
+
+      root: "datasets/tusimple"
+
+  test:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: test
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple-test"
+
+  val:
+    type: LaneDataset
+    parameters:
+      S: *S
+      dataset: tusimple
+      split: val
+      img_size: [*img_h, *img_w]
+      max_lanes: *max_lanes
+      normalize: false
+      aug_chance: 0
+      augmentations:
+      root: "datasets/tusimple"
+
+[2022-09-16 11:40:42,898] [lib.datasets.tusimple] [INFO] Loading TuSimple annotations...
+[2022-09-16 11:40:43,103] [lib.datasets.tusimple] [INFO] 3626 annotations loaded, with a maximum of 5 lanes in an image.
+[2022-09-16 11:40:43,103] [lib.datasets.lane_dataset] [INFO] Transforming annotations to the model's target format...
+[2022-09-16 11:40:45,613] [lib.datasets.lane_dataset] [INFO] Done.
+[2022-09-16 11:40:45,615] [lib.experiment] [DEBUG] Epoch [1/100] starting.
